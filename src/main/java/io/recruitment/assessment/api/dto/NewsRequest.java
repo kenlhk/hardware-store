@@ -1,5 +1,6 @@
 package io.recruitment.assessment.api.dto;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
 
 @Data

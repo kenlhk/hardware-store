@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 @Data
 public class Product {
     @Id
@@ -25,6 +25,7 @@ public class Product {
 
     @Column(name = "images")
     @ElementCollection
+    @CollectionTable(name = "product_image")
     private List<String> images;
 
     @Column(name = "price")

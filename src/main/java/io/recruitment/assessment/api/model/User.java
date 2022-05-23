@@ -4,9 +4,10 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @Data
 public class User {
     @Id
@@ -35,13 +36,20 @@ public class User {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "role")
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role")
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Set<Role> roles;
 
     @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_order",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id"))
     private List<Order> orders;
 
     @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_cart",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "cart_id"))
     private List<Product> cart;
 }
