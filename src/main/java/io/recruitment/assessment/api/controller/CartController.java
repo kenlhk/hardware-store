@@ -1,26 +1,25 @@
 package io.recruitment.assessment.api.controller;
 
-import io.recruitment.assessment.api.dto.news.NewsRequest;
-import io.recruitment.assessment.api.dto.news.NewsResponse;
-import io.recruitment.assessment.api.mapper.NewsMapper;
+import io.recruitment.assessment.api.dto.order.CartRequest;
+import io.recruitment.assessment.api.dto.order.CartResponse;
+import io.recruitment.assessment.api.mapper.CartMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/news")
+@RequestMapping("/cart")
 @RequiredArgsConstructor
-public class NewsController {
+public class CartController {
 
-    private final NewsMapper newsMapper;
+    private final CartMapper cartMapper;
 
     @PostMapping
-    public ResponseEntity<NewsResponse> createNews(@RequestBody @Validated NewsRequest request) {
-        NewsResponse response = newsMapper.createNews(request);
+    public ResponseEntity<CartResponse> addProduct(@RequestBody CartRequest request) {
+        CartResponse response = cartMapper.addProduct(request);
         return ResponseEntity.ok(response);
     }
 }

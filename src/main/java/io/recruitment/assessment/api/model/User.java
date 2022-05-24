@@ -47,9 +47,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "order_id"))
     private List<Order> orders;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_cart",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "cart_id"))
-    private List<Product> cart;
+    @OneToOne(fetch = FetchType.EAGER)
+    private Cart cart;
 }

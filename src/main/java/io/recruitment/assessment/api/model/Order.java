@@ -15,8 +15,8 @@ public class Order {
     private Long id;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "order_product",
+    @JoinTable(name = "order_item",
             joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> products;
+            inverseJoinColumns = @JoinColumn(name = "item_id"))
+    private List<Item> items;
 }

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
-public class NewServiceImpl implements NewsService {
+public class NewsServiceImpl implements NewsService {
 
     private final NewsRepository newsRepository;
 

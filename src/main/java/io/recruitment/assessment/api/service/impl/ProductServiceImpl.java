@@ -28,7 +28,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product updateProduct(Product product, Long id) {
-        if(productRepository.findById(id).isEmpty()){
+        if (productRepository.findById(id).isEmpty()) {
             throw new ApiRequestException("Product not found.", HttpStatus.NOT_FOUND);
         }
         product.setId(id);

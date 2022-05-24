@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ApiExceptionHandler {
     @ExceptionHandler(ApiRequestException.class)
-    public ResponseEntity<String>handleApiRequestException(ApiRequestException exception){
+    public ResponseEntity<String> handleApiRequestException(ApiRequestException exception) {
         return ResponseEntity.status(exception.getHttpStatus()).body(exception.getMessage());
     }
 }

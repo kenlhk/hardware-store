@@ -1,6 +1,5 @@
-package io.recruitment.assessment.api.dto;
+package io.recruitment.assessment.api.dto.product;
 
-import com.sun.istack.NotNull;
 import lombok.Data;
 
 import java.util.List;

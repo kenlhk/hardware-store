@@ -1,4 +1,4 @@
-package io.recruitment.assessment.api.dto;
+package io.recruitment.assessment.api.dto.product;
 
 import lombok.Data;
 

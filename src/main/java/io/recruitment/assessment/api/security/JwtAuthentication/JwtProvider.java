@@ -1,6 +1,9 @@
 package io.recruitment.assessment.api.security.JwtAuthentication;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import io.recruitment.assessment.api.exception.ApiRequestException;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +22,7 @@ import java.util.Date;
 
 @Component
 @RequiredArgsConstructor
-public class JwtAuthenticationProvider {
+public class JwtProvider {
 
     @Value("${jwt.header}")
     private String requestHeader;
@@ -30,9 +33,12 @@ public class JwtAuthenticationProvider {
     @Value("${jwt.expiration}")
     private Long validPeriodInMilliseconds;
 
+    @Value("${jwt.prefix}")
+    private String prefix;
+
     private final UserDetailsService userDetailsService;
 
-    public String createToken(String username){
+    public String createToken(String username) {
         Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
         return Jwts.builder()
                 .setSubject(username)
@@ -58,10 +64,13 @@ public class JwtAuthenticationProvider {
     }
 
     public String resolveToken(HttpServletRequest request) {
-        return request.getHeader(requestHeader);
+        if(request.getHeader(requestHeader) == null){
+            return null;
+        }
+        return request.getHeader(requestHeader).replaceAll(prefix, "");
     }
 
-    private Jws<Claims> readToken(String token){
+    private Jws<Claims> readToken(String token) {
         try {
             Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
             Jws<Claims> jws = Jwts.parserBuilder()

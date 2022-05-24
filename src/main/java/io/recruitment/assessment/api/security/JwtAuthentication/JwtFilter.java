@@ -14,18 +14,19 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class JwtFilter extends OncePerRequestFilter {
 
-    private final JwtAuthenticationProvider jwtAuthenticationProvider;
+    private final JwtProvider jwtProvider;
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        String token = jwtAuthenticationProvider.resolveToken(httpServletRequest);
-        if(token != null && jwtAuthenticationProvider.validateToken(token)){
-            Authentication authentication = jwtAuthenticationProvider.getAuthentication(token);
-            if(authentication != null) {
+        String token = jwtProvider.resolveToken(httpServletRequest);
+        if (token != null && jwtProvider.validateToken(token)) {
+            Authentication authentication = jwtProvider.getAuthentication(token);
+            if (authentication != null) {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
+        filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 }

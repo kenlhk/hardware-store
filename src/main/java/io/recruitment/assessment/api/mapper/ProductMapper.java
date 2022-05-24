@@ -1,7 +1,7 @@
 package io.recruitment.assessment.api.mapper;
 
-import io.recruitment.assessment.api.dto.ProductRequest;
-import io.recruitment.assessment.api.dto.ProductResponse;
+import io.recruitment.assessment.api.dto.product.ProductRequest;
+import io.recruitment.assessment.api.dto.product.ProductResponse;
 import io.recruitment.assessment.api.model.Product;
 import io.recruitment.assessment.api.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -14,18 +14,18 @@ public class ProductMapper {
     private final MapStructMapper mapper;
     private final ProductService productService;
 
-    public ProductResponse createProduct(ProductRequest productRequest){
-        Product product = mapper.requestToProduct(productRequest);
-        return mapper.productToResponse(productService.createProduct(product));
+    public ProductResponse createProduct(ProductRequest productRequest) {
+        Product product = mapper.productDtoToProduct(productRequest);
+        return mapper.productToProductDto(productService.createProduct(product));
     }
 
-    public ProductResponse updateProduct(ProductRequest productRequest, Long productID){
-        Product product = mapper.requestToProduct(productRequest);
+    public ProductResponse updateProduct(ProductRequest productRequest, Long productID) {
+        Product product = mapper.productDtoToProduct(productRequest);
         product.setId(productID);
-        return mapper.productToResponse(productService.updateProduct(product, productID));
+        return mapper.productToProductDto(productService.updateProduct(product, productID));
     }
 
-    public void deleteProduct(Long productID){
+    public void deleteProduct(Long productID) {
         productService.deleteProduct(productID);
     }
 }
