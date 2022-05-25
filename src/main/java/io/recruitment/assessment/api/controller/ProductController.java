@@ -3,7 +3,9 @@ package io.recruitment.assessment.api.controller;
 import io.recruitment.assessment.api.dto.product.ProductRequest;
 import io.recruitment.assessment.api.dto.product.ProductResponse;
 import io.recruitment.assessment.api.mapper.ProductMapper;
+import io.recruitment.assessment.api.model.Product;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,9 +18,10 @@ public class ProductController {
 
     private final ProductMapper productMapper;
 
-    @GetMapping("/test")
-    String test(){
-        return SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+    @GetMapping
+    public ResponseEntity<Page<ProductResponse>> findByPage(@RequestParam int page, @RequestParam int size){
+        Page<ProductResponse> response = productMapper.findByPage(page, size);
+        return ResponseEntity.ok(response);
     }
 
     @Secured("ROLE_ADMIN")

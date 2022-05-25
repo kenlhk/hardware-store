@@ -13,7 +13,6 @@ import io.recruitment.assessment.api.service.AuthenticationService;
 import io.recruitment.assessment.api.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,7 +22,6 @@ public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
     private final ProductRepository productRepository;
     private final ItemRepository itemRepository;
-    private final UserRepository userRepository;
     private final AuthenticationService authenticationService;
 
     @Override
@@ -48,7 +46,6 @@ public class CartServiceImpl implements CartService {
             itemRepository.save(item);
             cart.getItems().add(item);
         }
-        System.out.println(cart.getItems().toString());
         cartRepository.save(cart);
         return cart;
     }

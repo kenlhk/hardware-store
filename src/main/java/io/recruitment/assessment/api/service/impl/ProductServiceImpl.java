@@ -5,6 +5,8 @@ import io.recruitment.assessment.api.model.Product;
 import io.recruitment.assessment.api.repository.ProductRepository;
 import io.recruitment.assessment.api.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,12 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+
+    @Override
+    public Page<Product> findByPage(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return productRepository.findAll(pageRequest);
+    }
 
     @Override
     public Product createProduct(Product product) {

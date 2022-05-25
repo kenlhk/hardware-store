@@ -5,15 +5,14 @@ import io.recruitment.assessment.api.dto.news.NewsRequest;
 import io.recruitment.assessment.api.dto.news.NewsResponse;
 import io.recruitment.assessment.api.dto.order.CartResponse;
 import io.recruitment.assessment.api.dto.order.ItemResponse;
+import io.recruitment.assessment.api.dto.order.OrderResponse;
 import io.recruitment.assessment.api.dto.product.ProductRequest;
 import io.recruitment.assessment.api.dto.product.ProductResponse;
-import io.recruitment.assessment.api.model.Cart;
-import io.recruitment.assessment.api.model.Item;
-import io.recruitment.assessment.api.model.News;
-import io.recruitment.assessment.api.model.Product;
+import io.recruitment.assessment.api.model.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
 import java.util.Map;
 
 @Mapper(componentModel = "spring")
@@ -32,4 +31,6 @@ public interface MapStructMapper {
 
     @Mapping(source = "product.id", target = "productID")
     ItemResponse itemToItemDto(Item item);
+
+    List<OrderResponse> toOrderDto(List<Order> orders);
 }
