@@ -1,7 +1,6 @@
 package io.recruitment.assessment.api.mapper;
 
 import io.recruitment.assessment.api.dto.order.OrderResponse;
-import io.recruitment.assessment.api.service.NewsService;
 import io.recruitment.assessment.api.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,7 +14,7 @@ public class OrderMapper {
     private final MapStructMapper mapper;
     private final OrderService orderService;
 
-    public List<OrderResponse> findAll(){
+    public List<OrderResponse> findAll() {
         return mapper.toOrderDto(orderService.findAll());
     }
 }

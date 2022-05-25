@@ -3,10 +3,12 @@ package io.recruitment.assessment.api.service.impl;
 import io.recruitment.assessment.api.exception.ApiRequestException;
 import io.recruitment.assessment.api.model.Product;
 import io.recruitment.assessment.api.repository.ProductRepository;
+import io.recruitment.assessment.api.repository.specification.ProductSpecificationBuilder;
 import io.recruitment.assessment.api.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +21,10 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public Page<Product> findByPage(int page, int size) {
-        PageRequest pageRequest = PageRequest.of(page, size);
-        return productRepository.findAll(pageRequest);
+    public Page<Product> findAll(String search, Pageable pageable) {
+        ProductSpecificationBuilder builder = new ProductSpecificationBuilder();
+        Specification<Product> specification = builder.parse(search).build();
+        return productRepository.findAll(specification, pageable);
     }
 
     @Override

@@ -8,7 +8,6 @@ import io.recruitment.assessment.api.model.User;
 import io.recruitment.assessment.api.repository.CartRepository;
 import io.recruitment.assessment.api.repository.ItemRepository;
 import io.recruitment.assessment.api.repository.ProductRepository;
-import io.recruitment.assessment.api.repository.UserRepository;
 import io.recruitment.assessment.api.service.AuthenticationService;
 import io.recruitment.assessment.api.service.CartService;
 import lombok.RequiredArgsConstructor;
@@ -31,15 +30,15 @@ public class CartServiceImpl implements CartService {
         Product product = productRepository.findById(productID)
                 .orElseThrow(() -> new ApiRequestException("Product not found", HttpStatus.NOT_FOUND));
         Boolean exist = false;
-        for(Item item: cart.getItems()){
-            if(item.getProduct().equals(product)){
+        for (Item item : cart.getItems()) {
+            if (item.getProduct().equals(product)) {
                 item.setQuantity(item.getQuantity() + quality);
                 itemRepository.save(item);
                 exist = true;
                 break;
             }
         }
-        if(!exist){
+        if (!exist) {
             Item item = new Item();
             item.setProduct(product);
             item.setQuantity(quality);

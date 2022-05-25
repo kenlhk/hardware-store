@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationConfiguration {
 
     @Bean
-    public Faker getFakeBean(){
+    public Faker getFakerBean() {
         return new Faker();
     }
 }

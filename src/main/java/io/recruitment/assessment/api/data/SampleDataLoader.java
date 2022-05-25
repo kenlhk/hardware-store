@@ -26,14 +26,14 @@ public class SampleDataLoader implements CommandLineRunner {
         Random random = new Random();
 
         // create products
-        if(productRepository.count() < 10){
-            List<Product> products = LongStream.rangeClosed(1,1000).mapToObj(i -> new Product(
+        if (productRepository.count() < 10) {
+            List<Product> products = LongStream.rangeClosed(1, 1000).mapToObj(i -> new Product(
                     null,
                     faker.funnyName().name(),
                     faker.lorem().characters(100, 200),
                     faker.internet().image(),
-                    IntStream.rangeClosed(1,4).mapToObj(j -> faker.internet().image()).collect(Collectors.toList()),
-                    random.nextDouble()*100,
+                    IntStream.rangeClosed(1, 4).mapToObj(j -> faker.internet().image()).collect(Collectors.toList()),
+                    random.nextDouble() * 100,
                     random.nextDouble()
             )).collect(Collectors.toList());
             productRepository.saveAll(products);

@@ -64,7 +64,7 @@ public class JwtProvider {
     }
 
     public String resolveToken(HttpServletRequest request) {
-        if(request.getHeader(requestHeader) == null){
+        if (request.getHeader(requestHeader) == null) {
             return null;
         }
         return request.getHeader(requestHeader).replaceAll(prefix, "");

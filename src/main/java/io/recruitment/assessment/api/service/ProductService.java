@@ -2,13 +2,13 @@ package io.recruitment.assessment.api.service;
 
 import io.recruitment.assessment.api.model.Product;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface ProductService {
 
-    Page<Product> findByPage(int page, int size);
+    Page<Product> findAll(String search, Pageable pageable);
 
     Product createProduct(Product product);
 

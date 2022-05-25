@@ -51,9 +51,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public Map<String, String> login(String email, String password) {
-        try{
+        try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new ApiRequestException("Incorrect email or password.", HttpStatus.FORBIDDEN);
         }
         User user = userRepository.findByEmail(email).orElseThrow();
