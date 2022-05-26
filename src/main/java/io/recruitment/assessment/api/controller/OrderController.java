@@ -4,9 +4,7 @@ import io.recruitment.assessment.api.dto.order.OrderResponse;
 import io.recruitment.assessment.api.mapper.OrderMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +18,12 @@ public class OrderController {
     @GetMapping
     public ResponseEntity<List<OrderResponse>> findAll() {
         List<OrderResponse> response = orderMapper.findAll();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{orderId}")
+    public ResponseEntity<OrderResponse> findById(@PathVariable Long orderId) {
+        OrderResponse response = orderMapper.findById(orderId);
         return ResponseEntity.ok(response);
     }
 }

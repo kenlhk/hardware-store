@@ -14,10 +14,13 @@ public class CartMapper {
     private final MapStructMapper mapper;
     private final CartService cartService;
 
+    public CartResponse findAll() {
+        Cart cart = cartService.findAll();
+        return mapper.cartToCartDto(cart);
+    }
+
     public CartResponse addProduct(CartRequest request) {
         Cart cart = cartService.addProduct(request.getProductID(), request.getQuantity());
         return mapper.cartToCartDto(cart);
     }
-
-
 }

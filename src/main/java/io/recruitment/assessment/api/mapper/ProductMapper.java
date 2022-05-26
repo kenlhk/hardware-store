@@ -23,6 +23,11 @@ public class ProductMapper {
         return response;
     }
 
+    public ProductResponse findById(Long id){
+        Product product = productService.findById(id);
+        return mapper.productToProductDto(product);
+    }
+
     public ProductResponse createProduct(ProductRequest productRequest) {
         Product product = mapper.productDtoToProduct(productRequest);
         return mapper.productToProductDto(productService.createProduct(product));

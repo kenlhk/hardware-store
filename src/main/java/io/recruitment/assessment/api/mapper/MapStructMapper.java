@@ -11,6 +11,7 @@ import io.recruitment.assessment.api.dto.product.ProductResponse;
 import io.recruitment.assessment.api.model.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,8 @@ public interface MapStructMapper {
 
     @Mapping(source = "product.id", target = "productID")
     ItemResponse itemToItemDto(Item item);
+
+    OrderResponse orderToOrderDto(Order order);
 
     List<OrderResponse> toOrderDto(List<Order> orders);
 }

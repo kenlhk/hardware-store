@@ -2,6 +2,7 @@ package io.recruitment.assessment.api.service.impl;
 
 import io.recruitment.assessment.api.exception.ApiRequestException;
 import io.recruitment.assessment.api.model.Cart;
+import io.recruitment.assessment.api.model.Role;
 import io.recruitment.assessment.api.model.User;
 import io.recruitment.assessment.api.repository.CartRepository;
 import io.recruitment.assessment.api.repository.UserRepository;
@@ -16,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,14 +39,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = new User();
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
-        Cart cart = new Cart();
-        user.setCart(cart);
+        user.getRoles().add(Role.CUSTOMER); // default role
 
         String token = jwtProvider.createToken(email);
         Map<String, String> response = new HashMap<>();
         response.put("email", email);
         response.put("token", token);
 
+        Cart cart = new Cart();
         cartRepository.save(cart);
         userRepository.save(user);
         return response;
@@ -57,7 +59,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         } catch (Exception e) {
             throw new ApiRequestException("Incorrect email or password.", HttpStatus.FORBIDDEN);
         }
-        User user = userRepository.findByEmail(email).orElseThrow();
         String token = jwtProvider.createToken(email);
         Map<String, String> response = new HashMap<>();
         response.put("email", email);

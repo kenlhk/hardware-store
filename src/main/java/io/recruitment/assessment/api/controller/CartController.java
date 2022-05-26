@@ -5,10 +5,7 @@ import io.recruitment.assessment.api.dto.order.CartResponse;
 import io.recruitment.assessment.api.mapper.CartMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/cart")
@@ -16,6 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class CartController {
 
     private final CartMapper cartMapper;
+
+    @GetMapping
+    public ResponseEntity<CartResponse> findAll() {
+        CartResponse response = cartMapper.findAll();
+        return ResponseEntity.ok(response);
+    }
 
     @PostMapping
     public ResponseEntity<CartResponse> addProduct(@RequestBody CartRequest request) {

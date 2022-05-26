@@ -24,6 +24,12 @@ public class CartServiceImpl implements CartService {
     private final AuthenticationService authenticationService;
 
     @Override
+    public Cart findAll() {
+        User user = authenticationService.getCurrentUser();
+        return user.getCart();
+    }
+
+    @Override
     public Cart addProduct(Long productID, Long quality) {
         User user = authenticationService.getCurrentUser();
         Cart cart = user.getCart();

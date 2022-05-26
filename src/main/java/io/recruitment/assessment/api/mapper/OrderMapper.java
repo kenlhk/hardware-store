@@ -17,4 +17,8 @@ public class OrderMapper {
     public List<OrderResponse> findAll() {
         return mapper.toOrderDto(orderService.findAll());
     }
+
+    public OrderResponse findById(Long orderId) {
+        return mapper.orderToOrderDto(orderService.findById(orderId));
+    }
 }

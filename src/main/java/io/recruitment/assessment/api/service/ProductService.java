@@ -10,6 +10,8 @@ public interface ProductService {
 
     Page<Product> findAll(String search, Pageable pageable);
 
+    Product findById(Long id);
+
     Product createProduct(Product product);
 
     List<Product> findAllProducts();

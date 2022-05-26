@@ -28,6 +28,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product findById(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ApiRequestException("Product not found.", HttpStatus.NOT_FOUND));
+        return product;
+    }
+
+    @Override
     public Product createProduct(Product product) {
         return productRepository.save(product);
     }
