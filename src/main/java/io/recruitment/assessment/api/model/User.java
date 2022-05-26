@@ -3,6 +3,8 @@ package io.recruitment.assessment.api.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -49,4 +51,9 @@ public class User {
 
     @OneToOne(fetch = FetchType.EAGER)
     private Cart cart;
+
+    public User(){
+        this.roles = new HashSet<>();
+        this.orders = new ArrayList<>();
+    }
 }

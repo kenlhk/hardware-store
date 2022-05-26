@@ -5,13 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "products")
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_seq")
@@ -37,4 +37,8 @@ public class Product {
 
     @Column(name = "discount")
     private Double discount;
+
+    public Product(){
+        this.images = new ArrayList<>();
+    }
 }

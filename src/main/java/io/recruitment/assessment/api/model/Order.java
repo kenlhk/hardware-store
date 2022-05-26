@@ -3,6 +3,7 @@ package io.recruitment.assessment.api.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,4 +20,8 @@ public class Order {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Item> items;
+
+    public Order(){
+        this.items = new ArrayList<>();
+    }
 }

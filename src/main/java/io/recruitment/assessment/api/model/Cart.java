@@ -3,6 +3,7 @@ package io.recruitment.assessment.api.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,4 +17,8 @@ public class Cart {
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<Item> items;
+
+    public Cart(){
+        this.items = new ArrayList<>();
+    }
 }
