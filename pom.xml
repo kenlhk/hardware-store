@@ -17,7 +17,6 @@
         <java.version>11</java.version>
         <org.mapstruct.version>1.5.0.RC1</org.mapstruct.version>
         <lambok.version>1.18.24</lambok.version>
-        <quersql.version>4.1.3</quersql.version>
     </properties>
 
     <dependencies>
