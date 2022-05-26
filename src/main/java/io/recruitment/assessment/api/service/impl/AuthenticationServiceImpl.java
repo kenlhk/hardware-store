@@ -39,13 +39,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setPassword(passwordEncoder.encode(password));
         Cart cart = new Cart();
         user.setCart(cart);
-        cartRepository.save(cart);
-        userRepository.save(user);
 
         String token = jwtProvider.createToken(email);
         Map<String, String> response = new HashMap<>();
         response.put("email", email);
         response.put("token", token);
+
+        cartRepository.save(cart);
+        userRepository.save(user);
         return response;
     }
 

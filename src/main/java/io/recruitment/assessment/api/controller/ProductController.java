@@ -21,6 +21,7 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<Page<ProductResponse>> findAll(@RequestParam(required = false) String search, Pageable page) {
+        System.out.println(page);
         Page<ProductResponse> response = productMapper.findAll(search, page);
         return ResponseEntity.ok(response);
     }
